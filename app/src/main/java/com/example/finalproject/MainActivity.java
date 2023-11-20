@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+/*
+
         binding.dictionaryButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
             startActivity(intent);
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
             startActivity(intent);
         });
+
+*/
 
         Log.w("MainActivity", "In onCreate() - Loading Widgets");
     }
