@@ -23,8 +23,8 @@ MyRecord selected;
 
         binding.messageText.setText(selected.getRecord());
         binding.timeText.setText(selected.getTimeSave());
-        binding.latitudeText.setText("Latitude: " + selected.getLatitude());
-        binding.longitudeText.setText("Longitude: " + selected.getLongitude());
+        binding.latitudeText.setText("sunrise time: " + selected.getLatitude());
+        binding.longitudeText.setText("sunset time: " + selected.getLongitude());
         return binding.getRoot();
     }
 }
