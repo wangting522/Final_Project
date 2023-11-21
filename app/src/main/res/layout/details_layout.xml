@@ -26,20 +26,20 @@
         app:layout_constraintTop_toBottomOf="@+id/messageText" />
 
     <TextView
-        android:id="@+id/sendReceiveText"
+        android:id="@+id/latitudeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="location goes here"
+        android:text="latitude goes here"
         app:layout_constraintStart_toStartOf="@+id/timeText"
         app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
     <TextView
-        android:id="@+id/databaseText"
+        android:id="@+id/longitudeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Database id goes here"
-        app:layout_constraintStart_toStartOf="@+id/sendReceiveText"
-        app:layout_constraintTop_toBottomOf="@+id/sendReceiveText" />
+        android:text="longitude goes here"
+        app:layout_constraintStart_toStartOf="@+id/latitudeText"
+        app:layout_constraintTop_toBottomOf="@+id/latitudeText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

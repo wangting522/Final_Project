@@ -1,5 +1,6 @@
 package com.example.finalproject.data;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +16,15 @@ MyRecord selected;
     public RecordDetailsFragment(MyRecord m){
         selected = m;
     }
-    public View onCreateView( LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+    @SuppressLint("SetTextI18n")
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         DetailsLayoutBinding binding = DetailsLayoutBinding.inflate(inflater);
 
         binding.messageText.setText(selected.getRecord());
         binding.timeText.setText(selected.getTimeSave());
-        binding.databaseText.setText("ID="+ selected.getId());
+        binding.latitudeText.setText("sunrise time: " + selected.getLatitude());
+        binding.longitudeText.setText("sunset time: " + selected.getLongitude());
         return binding.getRoot();
     }
 }

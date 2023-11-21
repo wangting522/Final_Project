@@ -58,12 +58,14 @@
         android:layout_height="wrap_content"
         android:text="sunset goes here"
         android:visibility="invisible" />
+
     <Button
-    android:id="@+id/saveLocationButton"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Save Location"
-    android:layout_marginTop="32dp" />
+        android:id="@+id/saveLocationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Location"
+        android:layout_marginTop="32dp" />
+
     <Button
         android:id="@+id/viewFavoritesButton"
         android:layout_width="match_parent"
