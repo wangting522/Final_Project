@@ -16,18 +16,20 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-/*        // Set onClick listeners for each button using binding
+        // Set onClick listeners for each button using binding
         binding.sunButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SunActivity.class);
             startActivity(intent);
         });*/
+
+
 
         binding.dictionaryButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
             startActivity(intent);
         });
 
- /*       binding.songButton.setOnClickListener(v -> {
+       binding.songButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SongActivity.class);
             startActivity(intent);
         });
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
             startActivity(intent);//test
         });
-*/
+
+
         Log.w("MainActivity", "In onCreate() - Loading Widgets");
     }
     @Override
