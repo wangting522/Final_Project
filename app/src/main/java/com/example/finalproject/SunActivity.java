@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +43,6 @@ public class SunActivity extends AppCompatActivity {
         databaseExecutor.execute(() -> {
             RecordDatabase db = RecordDatabase.getDatabase(getApplicationContext());
             myRecordDAO = db.myRecordDAO();
-            // You can also perform initial database read operations here if needed
         });
 
         loadLastSearch();
@@ -51,10 +51,12 @@ public class SunActivity extends AppCompatActivity {
 
     private void setupButtonListeners() {
         binding.lookupButton.setOnClickListener(view -> {
+            String location = binding.locationEditText.getText().toString();
             String latitude = binding.latitudeEditText.getText().toString();
             String longitude = binding.longitudeEditText.getText().toString();
-            if (isValidInput(latitude, longitude)) {
-                saveLastSearch(latitude, longitude);
+            Log.d("SunActivity", "Location: " + location + ", Latitude: " + latitude + ", Longitude: " + longitude);
+            if (isValidInput(latitude, longitude,location)) {
+                saveLastSearch(latitude, longitude,location);
                 fetchSunriseSunsetTimes(latitude, longitude);
             } else {
                 Toast.makeText(SunActivity.this, "Invalid input", Toast.LENGTH_SHORT).show();
@@ -71,8 +73,20 @@ public class SunActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
-    private void fetchSunriseSunsetTimes(String latitude, String longitude) {
+    private void saveLocationToDatabase() {
+        String location = binding.locationEditText.getText().toString();
+        String latitude = binding.latitudeEditText.getText().toString();
+        String longitude = binding.longitudeEditText.getText().toString();
+        if (isValidInput(latitude, longitude,location)) {
+            databaseExecutor.execute(() -> {
+                MyRecord record = new MyRecord(location,
+                        new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()),
+                        true,latitude,longitude);
+                myRecordDAO.insertRecord(record);
+            });
+        }
+    }
+    public void fetchSunriseSunsetTimes(String latitude, String longitude) {
         String url = "https://api.sunrisesunset.io/json?lat=" + latitude + "&lng=" + longitude + "&date=today";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -95,33 +109,25 @@ public class SunActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void saveLocationToDatabase() {
-        String latitude = binding.latitudeEditText.getText().toString();
-        String longitude = binding.longitudeEditText.getText().toString();
-        if (isValidInput(latitude, longitude)) {
-            databaseExecutor.execute(() -> {
-                MyRecord record = new MyRecord(latitude + ", " + longitude,
-                        new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()),
-                        true);
-                myRecordDAO.insertRecord(record);
-            });
-        }
-    }
 
-    private boolean isValidInput(String latitude, String longitude) {
+
+    private boolean isValidInput(String latitude, String longitude, String location) {
         return !latitude.isEmpty() && !longitude.isEmpty();
     }
 
-    private void saveLastSearch(String latitude, String longitude) {
+    private void saveLastSearch(String latitude, String longitude, String location) {
         sharedPreferences.edit()
+                .putString("last_location", location)
                 .putString("last_latitude", latitude)
                 .putString("last_longitude", longitude)
                 .apply();
     }
 
     private void loadLastSearch() {
+        String lastLocation = sharedPreferences.getString("last_location", "");
         String lastLatitude = sharedPreferences.getString("last_latitude", "");
         String lastLongitude = sharedPreferences.getString("last_longitude", "");
+        binding.locationEditText.setText(lastLocation);
         binding.latitudeEditText.setText(lastLatitude);
         binding.longitudeEditText.setText(lastLongitude);
     }

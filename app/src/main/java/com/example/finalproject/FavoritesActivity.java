@@ -114,7 +114,7 @@ public class FavoritesActivity extends AppCompatActivity {
             favoriteLocations.addAll(fromDatabase);
         });
         //end of loading from the database
-
+/*
         binding.saveButton.setOnClickListener( cli -> {
 
             String userMessage = binding.userMessage.getText().toString();
@@ -140,7 +140,7 @@ public class FavoritesActivity extends AppCompatActivity {
             binding.userMessage.setText("");
             myAdapter.notifyDataSetChanged();
         });
-
+*/
         viewModel.selectedRecord.observe(this,(newValue) -> {
             RecordDetailsFragment chatFragment = new RecordDetailsFragment(newValue);
             //chatFragment.displayMessage(newValue);
@@ -199,6 +199,7 @@ public class FavoritesActivity extends AppCompatActivity {
                 int position = getAbsoluteAdapterPosition();
                 MyRecord selected = favoriteLocations.get(position);
                 viewModel.selectedRecord.postValue(selected);
+ //               fetchSunriseSunsetTimes(String.valueOf(selected.getLatitude()), String.valueOf(selected.getLongitude()));
             });
 
         }

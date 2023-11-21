@@ -15,12 +15,18 @@ public class MyRecord {
     String timeSave;
     @ColumnInfo(name="SendReceiveColumn")
     boolean isSaveButton;
+    @ColumnInfo(name = "latitude")
+    String latitude;
+    @ColumnInfo(name = "longitude")
+    String longitude;
     public MyRecord() {}
 
-    public MyRecord(String m, String t, boolean sent) {
+    public MyRecord(String m, String t, boolean sent, String latitude, String longitude) {
         this.record = m;
         this.timeSave = t;
         this.isSaveButton = sent;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
 
@@ -55,5 +61,19 @@ public class MyRecord {
 
     public void setSaveButton(boolean saveButton) {
         isSaveButton = saveButton;
+    }
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }
