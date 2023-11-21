@@ -15,6 +15,6 @@ public interface WordListDAO {
     @Query("Select * from WordList;")  //the SQL search
     public List<WordList> getAllMessages();  //for query
 
-    @Delete //number of rows deleted
+    @Delete //number of rows deleted//a
     public int deleteThisMessage(WordList m);  //delete this message by id
 }

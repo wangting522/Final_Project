@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
             startActivity(intent);
         });
-
+        //a
  /*       binding.songButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SongActivity.class);
             startActivity(intent);
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);//a
         });
 */
+
         Log.w("MainActivity", "In onCreate() - Loading Widgets");
     }
     @Override

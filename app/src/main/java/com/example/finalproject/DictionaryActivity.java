@@ -56,7 +56,7 @@ public class DictionaryActivity extends AppCompatActivity {
                                 .setNegativeButton("No", null) // null listener dismisses the dialog without doing anything
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .show();
-                    }
+                    }//a
                 }
             });
         }

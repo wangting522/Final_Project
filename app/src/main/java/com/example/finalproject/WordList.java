@@ -30,7 +30,7 @@ public class WordList {
 
     public String getMessage() {
         return word;
-    }
+    }//a
 
     public String getTimeSent() {
         return timeSent;
