@@ -16,12 +16,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.finalproject.data.FavoritesViewModel;
 import com.example.finalproject.data.RecordDetailsFragment;
 import com.example.finalproject.databinding.ActivityFavoritesBinding;
 import com.example.finalproject.databinding.ReceiveMessageBinding;
 import com.example.finalproject.databinding.SentMessageBinding;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +39,7 @@ import java.util.concurrent.Executors;
 
 public class FavoritesActivity extends AppCompatActivity {
     MyRecordDAO mDao;
+    private RequestQueue queue;
     ArrayList<MyRecord> favoriteLocations = null;
     FavoritesViewModel viewModel;
     RecyclerView.Adapter<MyRowHolder> myAdapter;
@@ -94,6 +102,7 @@ public class FavoritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        queue = Volley.newRequestQueue(this);
         binding = ActivityFavoritesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.myToolbar);
@@ -199,12 +208,30 @@ public class FavoritesActivity extends AppCompatActivity {
                 int position = getAbsoluteAdapterPosition();
                 MyRecord selected = favoriteLocations.get(position);
                 viewModel.selectedRecord.postValue(selected);
- //               fetchSunriseSunsetTimes(String.valueOf(selected.getLatitude()), String.valueOf(selected.getLongitude()));
+               fetchSunriseSunsetTimes(String.valueOf(selected.getLatitude()), String.valueOf(selected.getLongitude()));
             });
 
         }
     }
+    public void fetchSunriseSunsetTimes(String latitude, String longitude) {
+        String url = "https://api.sunrisesunset.io/json?lat=" + latitude + "&lng=" + longitude + "&timezone=CA&date=today";
 
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        JSONObject results = response.getJSONObject("results");
+                        String sunrise = results.getString("sunrise");
+                        String sunset = results.getString("sunset");
+                        runOnUiThread(() -> {
+                           viewModel.selectedRecord.postValue(new MyRecord("","", true, sunrise, sunset));
+                        });
+                    } catch (JSONException e) {
+                        Toast.makeText(FavoritesActivity.this, "Error parsing JSON", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> Toast.makeText(FavoritesActivity.this, "Error with request", Toast.LENGTH_SHORT).show());
+        queue.add(request);
+    }
 }
 
 

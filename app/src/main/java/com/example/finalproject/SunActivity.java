@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.finalproject.data.FavoritesViewModel;
 import com.example.finalproject.databinding.ActivitySunBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,12 +25,12 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class SunActivity extends AppCompatActivity {
-
+    FavoritesViewModel viewModel;
     private ActivitySunBinding binding;
     private RequestQueue queue;
     private SharedPreferences sharedPreferences;
     private MyRecordDAO myRecordDAO;
-    private Executor databaseExecutor = Executors.newSingleThreadExecutor();
+    private Executor databaseExecutor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +38,11 @@ public class SunActivity extends AppCompatActivity {
         binding = ActivitySunBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+
         queue = Volley.newRequestQueue(this);
         sharedPreferences = getSharedPreferences("SunAppPreferences", MODE_PRIVATE);
-
+        databaseExecutor = Executors.newSingleThreadExecutor();
         // Initialize the database and DAO in the background
         databaseExecutor.execute(() -> {
             RecordDatabase db = RecordDatabase.getDatabase(getApplicationContext());
@@ -87,7 +91,7 @@ public class SunActivity extends AppCompatActivity {
         }
     }
     public void fetchSunriseSunsetTimes(String latitude, String longitude) {
-        String url = "https://api.sunrisesunset.io/json?lat=" + latitude + "&lng=" + longitude + "&date=today";
+        String url = "https://api.sunrisesunset.io/json?lat=" + latitude + "&lng=" + longitude + "&timezone=CA&date=today";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
