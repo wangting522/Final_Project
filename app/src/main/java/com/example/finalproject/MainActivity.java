@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.recipeButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
-            startActivity(intent);
+            startActivity(intent);//test
         });
 */
         Log.w("MainActivity", "In onCreate() - Loading Widgets");
