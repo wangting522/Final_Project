@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome!" />
+        android:text="@string/welcome" />
 
     <EditText
         android:id="@+id/locationEditText"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="50dp"
-        android:text="Lookup" />
+        android:text="@string/search_name" />
 
     <TextView
         android:id="@+id/sunriseTextView"
@@ -63,14 +63,14 @@
         android:id="@+id/saveLocationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save Location"
+        android:text="@string/save_name"
         android:layout_marginTop="32dp" />
 
     <Button
         android:id="@+id/viewFavoritesButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Favorites"
+        android:text="@string/view_name"
         android:layout_marginTop="32dp" />
 
 

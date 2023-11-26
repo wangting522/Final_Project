@@ -23,7 +23,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
+/**
+ * SunActivity is an AppCompatActivity that handles the functionality of fetching and displaying sunrise and sunset times.
+ * It allows users to enter a location (latitude and longitude) and retrieves the corresponding sunrise and sunset times
+ * for that location using an external API. The activity also provides functionality to save and load the last searched location.
+ */
 public class SunActivity extends AppCompatActivity {
     FavoritesViewModel viewModel;
     private ActivitySunBinding binding;
@@ -31,14 +35,15 @@ public class SunActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private MyRecordDAO myRecordDAO;
     private Executor databaseExecutor;
-
+    /**
+     * Called when the activity is starting. This is where most initialization should go.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySunBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
 
         queue = Volley.newRequestQueue(this);
         sharedPreferences = getSharedPreferences("SunAppPreferences", MODE_PRIVATE);
@@ -52,7 +57,9 @@ public class SunActivity extends AppCompatActivity {
         loadLastSearch();
         setupButtonListeners();
     }
-
+    /**
+     * Sets up button listeners for various UI components.
+     */
     private void setupButtonListeners() {
         binding.lookupButton.setOnClickListener(view -> {
             String location = binding.locationEditText.getText().toString();
@@ -77,6 +84,9 @@ public class SunActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+    /**
+     * Saves the current location data to the database.
+     */
     private void saveLocationToDatabase() {
         String location = binding.locationEditText.getText().toString();
         String latitude = binding.latitudeEditText.getText().toString();
@@ -90,6 +100,11 @@ public class SunActivity extends AppCompatActivity {
             });
         }
     }
+    /**
+     * Fetches sunrise and sunset times based on the given latitude and longitude.
+     * @param latitude The latitude of the location.
+     * @param longitude The longitude of the location.
+     */
     public void fetchSunriseSunsetTimes(String latitude, String longitude) {
         String url = "https://api.sunrisesunset.io/json?lat=" + latitude + "&lng=" + longitude + "&timezone=CA&date=today";
 
@@ -113,12 +128,22 @@ public class SunActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-
-
+    /**
+     * Validates the user input for latitude, longitude, and location.
+     * @param latitude The latitude input from the user.
+     * @param longitude The longitude input from the user.
+     * @param location The location input from the user.
+     * @return true if the input is valid, false otherwise.
+     */
     private boolean isValidInput(String latitude, String longitude, String location) {
         return !latitude.isEmpty() && !longitude.isEmpty();
     }
-
+    /**
+     * Saves the last search details to SharedPreferences.
+     * @param latitude The latitude of the last search.
+     * @param longitude The longitude of the last search.
+     * @param location The location of the last search.
+     */
     private void saveLastSearch(String latitude, String longitude, String location) {
         sharedPreferences.edit()
                 .putString("last_location", location)
@@ -126,7 +151,9 @@ public class SunActivity extends AppCompatActivity {
                 .putString("last_longitude", longitude)
                 .apply();
     }
-
+    /**
+     * Loads the last search details from SharedPreferences and updates the UI.
+     */
     private void loadLastSearch() {
         String lastLocation = sharedPreferences.getString("last_location", "");
         String lastLatitude = sharedPreferences.getString("last_latitude", "");

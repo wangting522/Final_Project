@@ -9,6 +9,6 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/item_2"
-        android:title="About"
+        android:title="Help"
         app:showAsAction="never" />
 </menu>

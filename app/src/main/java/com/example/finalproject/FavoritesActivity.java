@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +37,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
+/**
+ * The FavoritesActivity is an AppCompatActivity that manages a list of favorite records.
+ * It displays the records in a RecyclerView and allows users to interact with them.
+ * Users can view record details, and delete records from their favorites list.
+ */
 public class FavoritesActivity extends AppCompatActivity {
     MyRecordDAO mDao;
     private RequestQueue queue;
@@ -44,60 +49,79 @@ public class FavoritesActivity extends AppCompatActivity {
     FavoritesViewModel viewModel;
     RecyclerView.Adapter<MyRowHolder> myAdapter;
     ActivityFavoritesBinding binding;
-    private Executor backgroundExecutor = Executors.newSingleThreadExecutor();
-
+    //private Executor backgroundExecutor = Executors.newSingleThreadExecutor();
+    /**
+     * Initializes the options menu for the activity.
+     * @param menu The options menu in which items are placed.
+     * @return true for the menu to be displayed; false otherwise.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.my_menu, menu);
         return true;
     }
-
+    /**
+     * Handles action bar item clicks.
+     * @param item The menu item that was selected.
+     * @return false to allow normal menu processing to proceed, true to consume it here.
+     */
+    @SuppressLint({"NonConstantResourceId", "NotifyDataSetChanged"})
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_1:
-                MyRecord selectedRecordValue = viewModel.selectedRecord.getValue(); // Get the selected record
+                MyRecord selectedRecordValue = viewModel.selectedRecord.getValue();
                 if (selectedRecordValue != null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(FavoritesActivity.this);
-                    builder.setTitle("Question");
-                    builder.setMessage("Do you want to delete this record? " + selectedRecordValue.getRecord()); // Use record text from the selected record
-                    builder.setNegativeButton("No", (dialog, which) -> { });
-                    builder.setPositiveButton("Yes", (dialog, which) -> {
-                        Executor thread1 = Executors.newSingleThreadExecutor();
-                        thread1.execute(() -> {
-                            mDao.deleteRecord(selectedRecordValue);
-                            runOnUiThread(() -> {
-                                favoriteLocations.remove(selectedRecordValue); // Remove from your list on the main thread
-                                myAdapter.notifyDataSetChanged();
+                    new AlertDialog.Builder(FavoritesActivity.this)
+                            .setTitle("Question")
+                            .setMessage("Do you want to delete this record? " + selectedRecordValue.getRecord())
+                            .setNegativeButton("No", null)
+                            .setPositiveButton("Yes", (dialog, which) -> {
+                                Executor thread1 = Executors.newSingleThreadExecutor();
+                                thread1.execute(() -> {
+                                    mDao.deleteRecord(selectedRecordValue);
+                                    runOnUiThread(() -> {
+                                        favoriteLocations.remove(selectedRecordValue);
+                                        myAdapter.notifyDataSetChanged();
 
-                                // Snackbar with Undo option
-                                Snackbar.make(binding.getRoot(), "Record deleted", Snackbar.LENGTH_LONG)
-                                        .setAction("Undo", undoView -> {
-                                            Executor thread2 = Executors.newSingleThreadExecutor();
-                                            thread2.execute(() -> {
-                                                mDao.insertRecord(selectedRecordValue);
-                                                runOnUiThread(() -> {
-                                                    favoriteLocations.add(selectedRecordValue);
-                                                    myAdapter.notifyDataSetChanged();
-                                                });
-                                            });
-                                        })
-                                        .show();
-                            });
-                        });
-                    });
-                    builder.create().show();
+                                        // Snackbar with Undo option
+                                        Snackbar.make(binding.getRoot(), "Record deleted", Snackbar.LENGTH_LONG)
+                                                .setAction("Undo", undoView -> {
+                                                    Executor thread2 = Executors.newSingleThreadExecutor();
+                                                    thread2.execute(() -> {
+                                                        mDao.insertRecord(selectedRecordValue);
+                                                        runOnUiThread(() -> {
+                                                            favoriteLocations.add(selectedRecordValue);
+                                                            myAdapter.notifyDataSetChanged();
+                                                        });
+                                                    });
+                                                })
+                                                .show();
+                                    });
+                                });
+                            })
+                            .show();
                 }
                 return true;
             case R.id.item_2:
-                Toast.makeText(this, "Version 1.0, created by YourName", Toast.LENGTH_LONG).show();
+                new AlertDialog.Builder(this)
+                        .setTitle("How to Use the interface")
+                        .setMessage(
+                                " Step 1: Input location, longitude and latitude and click Lookup button to get sunrise and sunset time.\n" +
+                                        " Step 2: Click Save Location button and View Favorites button. \n" +
+                                        " Step 3: Click saved location and get realtime information.")
+                        .setPositiveButton("OK", null)
+                        .show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,10 +219,17 @@ public class FavoritesActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * ViewHolder class for RecyclerView items.
+     * This class holds references to the TextViews for displaying a MyRecord.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
         public TextView messageView;
         public TextView timeView;
+        /**
+         * Constructor for MyRowHolder.
+         * @param itemView The view of the RecyclerView item.
+         */
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
             messageView = itemView.findViewById(R.id.record);
@@ -213,6 +244,11 @@ public class FavoritesActivity extends AppCompatActivity {
 
         }
     }
+    /**
+     * Fetches sunrise and sunset times based on latitude and longitude.
+     * @param latitude Latitude for the query.
+     * @param longitude Longitude for the query.
+     */
     public void fetchSunriseSunsetTimes(String latitude, String longitude) {
         String url = "https://api.sunrisesunset.io/json?lat=" + latitude + "&lng=" + longitude + "&timezone=CA&date=today";
 
