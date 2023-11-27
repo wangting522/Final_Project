@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Final Project</string>
+    <string name="search_name">查找</string>
+    <string name="save_name">保存地址</string>
+    <string name="view_name">我的最爱</string>
+    <string name="welcome">欢迎</string>
+</resources>
