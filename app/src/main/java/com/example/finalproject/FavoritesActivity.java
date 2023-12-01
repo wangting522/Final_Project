@@ -147,33 +147,7 @@ public class FavoritesActivity extends AppCompatActivity {
             favoriteLocations.addAll(fromDatabase);
         });
         //end of loading from the database
-/*
-        binding.saveButton.setOnClickListener( cli -> {
 
-            String userMessage = binding.userMessage.getText().toString();
-            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
-            String currentDateandTime = sdf.format(new Date());
-            MyRecord thisMessage = new MyRecord(userMessage, currentDateandTime, true);
-            favoriteLocations.add(thisMessage);
-            binding.userMessage.setText("");
-            myAdapter.notifyDataSetChanged();
-
-            // add to database on another thread
-            Executor thread1 = Executors.newSingleThreadExecutor();
-            thread1.execute( () -> {
-                thisMessage.id = mDao.insertRecord(thisMessage);
-            });
-
-        });
-        binding.deleteButton.setOnClickListener( cli -> {
-            String userMessage = binding.userMessage.getText().toString();
-            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
-            String currentDateandTime = sdf.format(new Date());
-            favoriteLocations.add(new MyRecord(userMessage, currentDateandTime, false));
-            binding.userMessage.setText("");
-            myAdapter.notifyDataSetChanged();
-        });
-*/
         viewModel.selectedRecord.observe(this,(newValue) -> {
             RecordDetailsFragment chatFragment = new RecordDetailsFragment(newValue);
             //chatFragment.displayMessage(newValue);
@@ -239,7 +213,7 @@ public class FavoritesActivity extends AppCompatActivity {
                 int position = getAbsoluteAdapterPosition();
                 MyRecord selected = favoriteLocations.get(position);
                 viewModel.selectedRecord.postValue(selected);
-               fetchSunriseSunsetTimes(String.valueOf(selected.getLatitude()), String.valueOf(selected.getLongitude()));
+             //  fetchSunriseSunsetTimes(String.valueOf(selected.getLatitude()), String.valueOf(selected.getLongitude()));
             });
 
         }
