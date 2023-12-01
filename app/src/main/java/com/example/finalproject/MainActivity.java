@@ -1,11 +1,14 @@
 package com.example.finalproject;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.finalproject.databinding.ActivityMainBinding;
+import com.example.finalproject.dictionary.DictionaryActivity;
+
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
