@@ -23,23 +23,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-/*
-        binding.dictionaryButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
-            startActivity(intent);
+
+//        binding.dictionaryButton.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
+//            startActivity(intent);
+//        });
+
+       binding.songButton.setOnClickListener(click -> {
+//            Intent intent = new Intent(MainActivity.this, Deezer.class);
+            startActivity(new Intent(this, Deezer.class));
         });
 
-       binding.songButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SongActivity.class);
-            startActivity(intent);
-        });
+//        binding.recipeButton.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
+//            startActivity(intent);
+//        });
 
-        binding.recipeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
-            startActivity(intent);
-        });
 
-*/
         Log.w("MainActivity", "In onCreate() - Loading Widgets");
     }
     @Override
