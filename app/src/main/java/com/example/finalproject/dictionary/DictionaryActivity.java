@@ -22,6 +22,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.finalproject.data.SearchViewModel;
 import com.example.finalproject.R;
 import com.example.finalproject.databinding.ActivityDictionaryBinding;
@@ -30,6 +35,12 @@ import com.example.finalproject.databinding.SearchMessageBinding;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,16 +56,15 @@ public class DictionaryActivity extends AppCompatActivity {
     SearchViewModel chatModel ;
     SearchWordDAO mDAO;
     RecyclerView.Adapter<MyRowHolder> myAdapter = null;
+    RequestQueue queue = null;
 
-//    public void onBackPressed() {
-//        chatModel.selectedMessage.postValue(null);
-//        super.onBackPressed();
-//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityDictionaryBinding.inflate(getLayoutInflater());
+        queue = Volley.newRequestQueue(this);
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
@@ -66,7 +76,7 @@ public class DictionaryActivity extends AppCompatActivity {
         messages = chatModel.messages.getValue();
         if(messages == null)
         {
-            chatModel.messages.postValue(messages = new ArrayList<SearchWord>());
+            chatModel.messages.postValue(messages = new ArrayList<>());
 
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(() ->
@@ -92,33 +102,62 @@ public class DictionaryActivity extends AppCompatActivity {
 //            }
 //        });
 
-        //SharedPreferences to save something about what was typed in the EditText for use the next time
+
         SharedPreferences prefs = getSharedPreferences("searchHistory", Context.MODE_PRIVATE);
-        AtomicReference<EditText> searchText = new AtomicReference<>(binding.editTextSearch);
+        AtomicReference<EditText> searchText = new AtomicReference<>(binding.editSearchWord);
 
-        binding.btnSearch.setOnClickListener(click -> {
-            String newMessage = binding.editTextSearch.getText().toString();
-            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
-            String currentDateandTime = sdf.format(new Date());
-            SearchWord thisMessage = new SearchWord(newMessage, currentDateandTime);
-            messages.add(thisMessage);
-            binding.editTextSearch.setText("");
-            myAdapter.notifyDataSetChanged();
-
+        binding.Searchbtn.setOnClickListener(click -> {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("searchText", searchText.get().getText().toString() );
             editor.apply();
+            String wordToSearch = binding.editSearchWord.getText().toString();
+                try {
+                    String encodedWordName = URLEncoder.encode (wordToSearch, "UTF-8");
 
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute( () -> {
-                thisMessage.id = mDAO.insertSearchWord(thisMessage);
-                Log.d("TAG", "The id created is: " + thisMessage.id);
-            });
+                    String url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + encodedWordName;
+
+                    JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                            (response) -> {   //this gets called if the server responded
+                                try {
+                                    StringBuilder definitionsBuilder = new StringBuilder();
+                                    JSONObject results = response.getJSONObject(0);
+                                    JSONArray meanings = results.getJSONArray("meanings");
+                                    messages.clear();
+
+                                    for (int i = 0; i < meanings.length(); i++) {
+                                        JSONObject aMeaning = meanings.getJSONObject(i);
+                                        JSONArray aDefinition = aMeaning.getJSONArray("definitions");
+                                        for (int j = 0; j < aDefinition.length(); j++) {
+                                            String def = aDefinition.getJSONObject(j).getString("definition");
+                                            definitionsBuilder.append(def).append("\n");
+                                            // Update the RecyclerView with the new word and its definitions
+//                                            SearchWord thisMessage = new SearchWord(wordToSearch, def);
+//                                            messages.add(thisMessage);
+                                        }
+//                                        myAdapter.notifyDataSetChanged();
+                                    }
+                                    String allDefinitions = definitionsBuilder.toString();
+                                    SearchWord thisMessage = new SearchWord(wordToSearch, allDefinitions);
+                                    messages.clear(); // Clear previous results
+                                    messages.add(thisMessage); // Add the single aggregated entry
+                                    myAdapter.notifyDataSetChanged();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.d("Reponse", "Received" + response.toString());
+
+                            },
+                            (error) ->{  });
+                    queue.add(request);
+                    // Clear the search input field
+                    binding.editSearchWord.setText("");
+
+                } catch (UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
 
 
-           // runOnUiThread(() ->{myAdapter.notifyItemInserted(messages.size() - 1);});
 
-            binding.editTextSearch.setText("");
         });
 
 
@@ -138,18 +177,17 @@ public class DictionaryActivity extends AppCompatActivity {
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-
                 SearchMessageBinding binding = SearchMessageBinding.inflate(getLayoutInflater());
 
                 return new MyRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
             }
 
-
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 SearchWord searchWord = messages.get(position);
                 holder.messageText.setText(searchWord.getWord());
-                holder.timeText.setText(searchWord.getTimeSent());
+
+                holder.definitionText.setText(searchWord.getDefinition());
             }
 
             @Override
@@ -174,7 +212,7 @@ public class DictionaryActivity extends AppCompatActivity {
             case R.id.deleteButton:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Do you want to delete the selected message?");
+                builder.setMessage("Do you want to delete this word?");
                 builder.setTitle("Delete Message")
                         .setPositiveButton("Yes", (dialog, cl) -> {
                             // Get the selected message
@@ -214,13 +252,17 @@ public class DictionaryActivity extends AppCompatActivity {
 
                 // Get the currently selected word
                 SearchWord selectedWord = chatModel.selectedMessage.getValue();
-                if (selectedWord != null) {
-                    // Save the word to favorites
-                    //saveWordToFavorites(selectedWord);
-                } else {
-                    // If no word is selected, inform the user
-                    Toast.makeText(this, "No word selected to save", Toast.LENGTH_SHORT).show();
-                }
+                messages.add(selectedWord);
+                myAdapter.notifyDataSetChanged();
+                Executor addthread = Executors.newSingleThreadExecutor();
+                addthread.execute(( ) -> {
+                    //this is on a background thread
+                    selectedWord.id = (int)mDAO.insertSearchWord(selectedWord); //get the ID from the database
+                    Log.d("TAG", "The id created is:" + selectedWord.id);
+                }); //the body of run()
+                Snackbar.make(this.findViewById(R.id.editSearchWord),"You added the term "
+                        +selectedWord.getWord(),Snackbar.LENGTH_LONG).show();
+                getSupportFragmentManager().popBackStack();
                 break;
 
             case R.id.about:
@@ -230,31 +272,11 @@ public class DictionaryActivity extends AppCompatActivity {
 
         return true;
     }
-  /*  private void saveWordToFavorites(SearchWord word) {
-        Executor thread = Executors.newSingleThreadExecutor();
-        thread.execute(() -> {
-            // Assume mDAO has a method to check if a word is already marked as favorite
-            boolean isFavorite = mDAO.isWordFavorite(wordString);
-            if (!isFavorite) {
-                // Assume mDAO has a method to insert a word into the favorites list
-                mDAO.insertFavoriteWord(wordString);
-                runOnUiThread(() -> {
-                    // Inform the user with a Toast or Snackbar
-                    Toast.makeText(DictionaryActivity.this, "Word saved to favorites", Toast.LENGTH_SHORT).show();
-                });
-            } else {
-                runOnUiThread(() -> {
-                    // Inform the user that the word is already in favorites
-                    Toast.makeText(DictionaryActivity.this, "Word is already in favorites", Toast.LENGTH_SHORT).show();
-                });
-            }
-        });
-    }
-*/
+
     class MyRowHolder extends RecyclerView.ViewHolder {
 
         public TextView messageText;
-        public TextView timeText;
+        public TextView definitionText;
 
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
@@ -263,11 +285,11 @@ public class DictionaryActivity extends AppCompatActivity {
                 int rowNum = getAbsoluteAdapterPosition();
                 SearchWord toDelete = messages.get(rowNum);
 
-                if (chatModel.selectedMessage.getValue() == null)
-                chatModel.selectedMessage.postValue(toDelete);
+                    //if (chatModel.selectedMessage.getValue() == null)
+                    chatModel.selectedMessage.postValue(toDelete);
             });
             messageText = itemView.findViewById(R.id.message);
-            timeText =itemView.findViewById(R.id.time);
+            definitionText =itemView.findViewById(R.id.definition);
         }
     }
 }

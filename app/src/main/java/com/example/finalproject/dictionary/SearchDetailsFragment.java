@@ -26,7 +26,7 @@ public class SearchDetailsFragment extends Fragment {
         DetailsLayoutDicBinding binding = DetailsLayoutDicBinding.inflate(inflater);
 
         binding.messageId.setText(word.word);
-        binding.timeId.setText(word.timeSent);
+        binding.definitionId.setText(word.definition);
         binding.databaseId.setText(Long.toString(word.id));
         return binding.getRoot();
     }

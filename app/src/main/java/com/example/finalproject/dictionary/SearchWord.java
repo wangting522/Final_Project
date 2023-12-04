@@ -13,21 +13,38 @@ public class SearchWord {
     @ColumnInfo(name="WordColumn")
     protected String word;
 
-    @ColumnInfo(name="TimeSentColumn")
-    protected String timeSent;
+    @ColumnInfo(name="DefinitionColumn")
+    protected String definition;
 
     public  SearchWord(){}
 
-    public SearchWord(String word, String timeSent) {
+    public SearchWord(String word, String definition) {
         this.word = word;
-        this.timeSent = timeSent;
+        this.definition = definition;
     }
 
+    // Getters and setters
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getWord() {
         return word;
     }
-    public String getTimeSent() {
-        return timeSent;
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public String getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(String definition) {
+        this.definition = definition;
     }
 }

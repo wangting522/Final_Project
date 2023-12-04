@@ -12,25 +12,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Database id goes here"
-        app:layout_constraintStart_toStartOf="@+id/time_id"
-        app:layout_constraintTop_toBottomOf="@+id/time_id" />
+        app:layout_constraintStart_toStartOf="@+id/definition_id"
+        app:layout_constraintTop_toBottomOf="@+id/definition_id" />
 
     <TextView
         android:id="@+id/message_id"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
-        android:text="MessageGoesHere"
+        android:text="Word goes here"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/time_id"
-        android:layout_width="wrap_content"
+        android:id="@+id/definition_id"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Time goes Here"
-        app:layout_constraintStart_toStartOf="@+id/message_id"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Definition goes here"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message_id" />
 </androidx.constraintlayout.widget.ConstraintLayout>
