@@ -22,14 +22,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
- /*
         binding.dictionaryButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
             startActivity(intent);
         });
-*/
-       binding.songButton.setOnClickListener(v -> {
+
+        binding.songButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, Deezer.class);
             startActivity(intent);
         });
