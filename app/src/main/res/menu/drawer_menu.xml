@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_home"
+            android:title="@string/drawer_home"
+            android:icon="@drawable/home_icon"/>
+
+        <item
+            android:id="@+id/drawer_search"
+            android:title="@string/drawer_search"
+            android:icon="@drawable/search_icon"/>
+
+        <item
+            android:id="@+id/drawer_fav"
+            android:title="@string/drawer_fav"
+            android:icon="@drawable/favorite_icon"/>
+
+        <item
+            android:id="@+id/drawer_help"
+            android:title="@string/drawer_help"
+            android:icon="@drawable/help_icon"/>
+
+        <item
+            android:id="@+id/drawer_about"
+            android:title="@string/drawer_aboutme"
+            android:icon="@drawable/about_icon"/>
+
+    </group>
+
+</menu>

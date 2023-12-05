@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/toolbar_home"
+        android:title="home"
+        app:showAsAction="always"
+        android:icon="@drawable/home" />
+
+    <item android:id="@+id/recipeFav"
+        android:title="add to favorite"
+        app:showAsAction="always"
+        android:icon="@drawable/star_unfilled" />
+
+    <item android:id="@+id/toolbar_help"
+        android:title="help"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/icon_help" />
+
+    <item android:id="@+id/toolbar_about"
+        android:title="about"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/about" />
+</menu>
