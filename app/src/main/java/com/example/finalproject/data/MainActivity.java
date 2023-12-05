@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-      // Set onClick listeners for each button using binding
+        // Set onClick listeners for each button using binding
         binding.sunButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SunActivity.class);
             startActivity(intent);
@@ -28,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
             startActivity(intent);
         });
-
+*/
        binding.songButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SongActivity.class);
+            Intent intent = new Intent(MainActivity.this, Deezer.class);
             startActivity(intent);
         });
-*/
+
         binding.recipeButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RecipeMainActivity.class);
             startActivity(intent);

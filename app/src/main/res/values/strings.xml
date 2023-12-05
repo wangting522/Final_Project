@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Android Final</string>
     <string name="ButtonText">Button</string>
     <string name="authors">Author: Mohamed Attia</string>
@@ -48,4 +49,11 @@
     <string name="save_name">Save Location</string>
     <string name="view_name">View Favorites</string>
     <string name="welcome">Welcome!</string>
+    <string name="search_bar">Search for Artist/Song Here</string>
+    <string name="welcome_msg">Welcome to Deezer</string>
+    <string name="search">Search</string>
+    <string name="preview">Preview Song</string>
+    <string name="add_playlist">Add to Playlist</string>
+    <string name="playlist_toolbar">Your Deezer Playlist</string>
 </resources>
+
