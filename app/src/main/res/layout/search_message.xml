@@ -10,8 +10,8 @@
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
         android:text="Word"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +21,11 @@
         android:id="@+id/definition"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
         android:text="Definition goes here"
         android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="@+id/message"
-        app:layout_constraintTop_toBottomOf="@+id/message" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/message"
+        app:layout_constraintTop_toTopOf="@+id/message" />
 </androidx.constraintlayout.widget.ConstraintLayout>

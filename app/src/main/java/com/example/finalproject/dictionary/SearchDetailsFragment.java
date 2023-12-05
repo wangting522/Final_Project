@@ -45,7 +45,7 @@ public class SearchDetailsFragment extends Fragment {
 
         binding.messageId.setText(word.word);
         binding.definitionId.setText(word.definition);
-        binding.databaseId.setText(Long.toString(word.id));
+//        binding.databaseId.setText(Long.toString(word.id));
         return binding.getRoot();
     }
 }

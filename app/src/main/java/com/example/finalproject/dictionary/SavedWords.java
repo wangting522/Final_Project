@@ -52,7 +52,7 @@ public class SavedWords extends AppCompatActivity {
 
         saveModel = new ViewModelProvider(this).get(SearchViewModel.class);
         // Initialize your Room database and DAO
-        SearchDatabase db = Room.databaseBuilder(getApplicationContext(), SearchDatabase.class, "Dictionary").build();
+        SearchDatabase db = Room.databaseBuilder(getApplicationContext(), SearchDatabase.class, "databaseFileOnPhone").build();
         mDAO = db.swDAO();
         messages = saveModel.messages.getValue();
 

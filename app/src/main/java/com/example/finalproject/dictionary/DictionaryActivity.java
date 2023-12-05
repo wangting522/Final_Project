@@ -242,8 +242,9 @@ public class DictionaryActivity extends AppCompatActivity {
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 SearchWord searchWord = messages.get(position);
                 holder.messageText.setText(searchWord.getWord());
+                String text = searchWord.getDefinition();
+                holder.definitionText.setText(text.substring(0,Math.min(text.length(),20))+"...");
 
-                holder.definitionText.setText(searchWord.getDefinition());
             }
             /**
             * Returns the total number of items in the data set held by the adapter.
