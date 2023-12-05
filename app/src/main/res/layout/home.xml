@@ -5,7 +5,7 @@
     android:id="@+id/home_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-        <!--    tools:context=".Recipe.mainFragment">-->
+
 
 
         <ImageView
@@ -50,9 +50,4 @@
             app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="@+id/recipeMainImage" />
 
-        <!--    <include-->
-        <!--        android:id="@+id/recipeToolbarDrawer"-->
-        <!--        layout="@layout/recipe_toolbar_drawer"-->
-        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
