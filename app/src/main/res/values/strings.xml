@@ -1,4 +1,5 @@
 <resources>
+<<<<<<< HEAD
 
 
     <string name="app_name">Android Final</string>
@@ -58,3 +59,11 @@
 
 
 </resources>
+=======
+    <string name="app_name">Final Project</string>
+    <string name="search_name">Lookup</string>
+    <string name="save_name">Save Location</string>
+    <string name="view_name">View Favorites</string>
+    <string name="welcome">Welcome!</string>
+</resources>
+>>>>>>> Sunny
