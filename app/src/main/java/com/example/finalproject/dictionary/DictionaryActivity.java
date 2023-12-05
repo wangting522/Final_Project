@@ -81,7 +81,6 @@ public class DictionaryActivity extends AppCompatActivity {
     RequestQueue queue = null;
     private SearchWord tempSearchWord;
 
-
     /**
      * Initializes the activity, sets up the user interface, and initializes components.
      * This method sets up the toolbar, RecyclerView, database connection, and ViewModel.
@@ -166,7 +165,7 @@ public class DictionaryActivity extends AppCompatActivity {
                                                 SearchWord thisMessage = new SearchWord(wordToSearch,def);
                                                 // Update the RecyclerView with the new word and its definitions
                                                 messages.add(thisMessage);
-                                                myAdapter.notifyDataSetChanged();
+//                                                myAdapter.notifyDataSetChanged();
                                             });
 //                                            Executor thread = Executors.newSingleThreadExecutor();
 //                                            thread.execute(() -> {
@@ -323,12 +322,12 @@ public class DictionaryActivity extends AppCompatActivity {
             case R.id.saveButton:
                 SearchWord addWord = chatModel.selectedMessage.getValue();
                 if (addWord != null) { // Check that the selected word is not null
-                    messages.add(addWord);
+//                    messages.add(addWord);
                     myAdapter.notifyDataSetChanged();
                     Executor addthread = Executors.newSingleThreadExecutor();
                     addthread.execute(() -> {
                         // Insert the word into the database on a background thread
-                        long wordId = mDAO.insertSearchWord(addWord); // Use the correct type 'long'
+                        long wordId = mDAO.insertSearchWord(tempSearchWord); // Use the correct type 'long'
                         addWord.setId(wordId); // Set the ID of the word with the correct type
                         Log.d("TAG", "The id created is:" + wordId);
                         runOnUiThread(() -> {
