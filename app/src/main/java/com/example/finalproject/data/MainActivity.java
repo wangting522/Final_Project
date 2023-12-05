@@ -16,57 +16,30 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-<<<<<<< HEAD:app/src/main/java/com/example/finalproject/data/MainActivity.java
-      // Set onClick listeners for each button using binding
+        // Set onClick listeners for each button using binding
         binding.sunButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SunActivity.class);
             startActivity(intent);
-=======
-        // Set onClick listeners for each button using binding
-//        binding.sunButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, SunActivity.class);
-//            startActivity(intent);
-//        });
-
-
-
-//        binding.dictionaryButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
-//            startActivity(intent);
-//        });
-
-       binding.songButton.setOnClickListener(click -> {
-//            Intent intent = new Intent(MainActivity.this, Deezer.class);
-            startActivity(new Intent(this, Deezer.class));
->>>>>>> Deezer:app/src/main/java/com/example/finalproject/MainActivity.java
         });
 
-//        binding.recipeButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
-//            startActivity(intent);
-//        });
 
-<<<<<<< HEAD:app/src/main/java/com/example/finalproject/data/MainActivity.java
  /*
         binding.dictionaryButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
             startActivity(intent);
         });
-
+*/
        binding.songButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SongActivity.class);
+            Intent intent = new Intent(MainActivity.this, Deezer.class);
             startActivity(intent);
         });
-*/
+
         binding.recipeButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RecipeMainActivity.class);
             startActivity(intent);
         });
 
 
-=======
-
->>>>>>> Deezer:app/src/main/java/com/example/finalproject/MainActivity.java
         Log.w("MainActivity", "In onCreate() - Loading Widgets");
     }
     @Override
