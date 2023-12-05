@@ -30,6 +30,19 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+/**
+ * SavedWords is an AppCompatActivity that handles the display and interaction with saved search words.
+ * <p>
+ * This activity provides functionality to view a list of saved search words, delete them, and view details about them.
+ * It uses a RecyclerView to display the words, and integrates with a Room database to retrieve and manage the saved words.
+ * <p>
+ * Key functionalities include:
+ * - Loading and displaying saved words from the Room database.
+ * - Allowing the user to delete words and providing an undo option.
+ * - Navigating to the details of a selected word.
+ *
+ * @see AppCompatActivity
+ */
 public class SavedWords extends AppCompatActivity {
 
     @NonNull DicSavedBinding binding;
@@ -39,12 +52,24 @@ public class SavedWords extends AppCompatActivity {
     private RecyclerView.Adapter savedAdapter;
     Intent dictionarySavedPage;
 
+    /**
+     * Initializes the options menu for the activity.
+     *
+     * @param menu The options menu in which items are placed.
+     * @return true for the menu to be displayed; false to not be shown.
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.dic_menu, menu);
         return true;
     }
 
+    /**
+     * Handles the activity's creation lifecycle event.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +116,15 @@ public class SavedWords extends AppCompatActivity {
             }
         });
 
-
-
         binding.saveWordRecyclerView.setAdapter(savedAdapter = new RecyclerView.Adapter<myRowHolder>() {
 
+            /**
+             * Called when RecyclerView needs a new ViewHolder of the given type to represent an item.
+             *
+             * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position.
+             * @param viewType The view type of the new View.
+             * @return A new ViewHolder that holds a View of the given view type.
+             */
             @NonNull
             @Override
             public myRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -111,15 +141,27 @@ public class SavedWords extends AppCompatActivity {
 
             }
 
+            /**
+             * Called by RecyclerView to display the data at the specified position.
+             *
+             * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position
+             *                 in the data set.
+             * @param position The position of the item within the adapter's data set.
+             */
             @Override
             public void onBindViewHolder(@NonNull myRowHolder holder, int position) {
                 SearchWord obj = messages.get(position);
                 holder.messageText.setText(obj.getWord());
-
-                holder.definitionText.setText(obj.getDefinition());
+                String text = obj.getDefinition();
+                holder.definitionText.setText(text.substring(0,Math.min(text.length(),20))+"...");
 
             }
 
+            /**
+             * Returns the total number of items in the data set held by the adapter.
+             *
+             * @return The total number of items in this adapter.
+             */
             @Override
             public int getItemCount() {
                 return messages.size();
@@ -130,7 +172,9 @@ public class SavedWords extends AppCompatActivity {
         binding.saveWordRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-
+    /**
+     * ViewHolder class for managing views in each row of the RecyclerView.
+     */
     class myRowHolder extends RecyclerView.ViewHolder {
 
         TextView messageText;
@@ -151,6 +195,12 @@ public class SavedWords extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handles the selection of an item in the options menu.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Return false to allow normal menu processing to proceed, true to consume it here.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch( item.getItemId() )

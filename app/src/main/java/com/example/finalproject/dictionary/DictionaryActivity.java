@@ -119,21 +119,6 @@ public class DictionaryActivity extends AppCompatActivity {
             });
         }
 
-//        chatModel.selectedMessage.observe(this, selectedMessage -> {
-//
-//            if(selectedMessage != null) {
-//                SearchDetailsFragment newFragment = new SearchDetailsFragment(selectedMessage);
-//
-//                FragmentManager fMgr = getSupportFragmentManager();
-//                FragmentTransaction transaction = fMgr.beginTransaction();
-//                transaction.addToBackStack("any string here");
-//                transaction.add(R.id.abcframeLayout, newFragment);
-//                //transaction.replace(R.id.frameLayout, newFragment);
-//                transaction.commit();
-//            }
-//        });
-
-
         SharedPreferences prefs = getSharedPreferences("searchHistory", Context.MODE_PRIVATE);
         AtomicReference<EditText> searchText = new AtomicReference<>(binding.editSearchWord);
 
@@ -195,12 +180,7 @@ public class DictionaryActivity extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
                 }
-
-
-
         });
-
-
         searchText.get().setText(prefs.getString("searchText",""));
         chatModel.selectedMessage.observe(this, (newMessageValue) -> {
             SearchDetailsFragment dictionaryFragment = new SearchDetailsFragment( newMessageValue );
@@ -332,7 +312,7 @@ public class DictionaryActivity extends AppCompatActivity {
                         addWord.setId(wordId); // Set the ID of the word with the correct type
                         Log.d("TAG", "The id created is:" + wordId);
                         runOnUiThread(() -> {
-                            Snackbar.make(binding.getRoot(), R.string.word_saved_notification + addWord.getWord(), Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(binding.getRoot(), "Word saved to list: " + addWord.getWord(), Snackbar.LENGTH_LONG).show();
                         });
                     });
                 } else {
