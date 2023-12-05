@@ -9,13 +9,17 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/saveButton"
-        android:title="Save"
-        app:showAsAction="never" />
+        android:icon="@drawable/save"
+        android:title="Save to list"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/wordList"
+        android:title="@string/Word_List" />
 
     <item
         android:id="@+id/about"
-        android:title="About"
+        android:title="@string/About"
         app:showAsAction="never" />
-
 
 </menu>

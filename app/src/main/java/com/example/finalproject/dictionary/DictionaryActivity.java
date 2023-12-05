@@ -1,5 +1,6 @@
 package com.example.finalproject.dictionary;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,6 +58,8 @@ public class DictionaryActivity extends AppCompatActivity {
     SearchWordDAO mDAO;
     RecyclerView.Adapter<MyRowHolder> myAdapter = null;
     RequestQueue queue = null;
+    private SearchWord tempSearchWord;
+
 
 
     @Override
@@ -130,17 +133,26 @@ public class DictionaryActivity extends AppCompatActivity {
                                         for (int j = 0; j < aDefinition.length(); j++) {
                                             String def = aDefinition.getJSONObject(j).getString("definition");
                                             definitionsBuilder.append(def).append("\n");
-                                            // Update the RecyclerView with the new word and its definitions
-//                                            SearchWord thisMessage = new SearchWord(wordToSearch, def);
-//                                            messages.add(thisMessage);
+                                            runOnUiThread( () -> {
+                                                SearchWord thisMessage = new SearchWord(wordToSearch,def);
+                                                // Update the RecyclerView with the new word and its definitions
+                                                messages.add(thisMessage);
+                                                myAdapter.notifyDataSetChanged();
+                                            });
+//                                            Executor thread = Executors.newSingleThreadExecutor();
+//                                            thread.execute(() -> {
+//                                                mDAO.insertSearchWord(new SearchWord(wordToSearch, def));
+//                                            });
+//
                                         }
 //                                        myAdapter.notifyDataSetChanged();
                                     }
                                     String allDefinitions = definitionsBuilder.toString();
-                                    SearchWord thisMessage = new SearchWord(wordToSearch, allDefinitions);
+                                    tempSearchWord = new SearchWord(wordToSearch, allDefinitions);
+                                    runOnUiThread(() -> {
                                     messages.clear(); // Clear previous results
-                                    messages.add(thisMessage); // Add the single aggregated entry
-                                    myAdapter.notifyDataSetChanged();
+                                    messages.add(tempSearchWord);
+                                    myAdapter.notifyDataSetChanged();});
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -150,7 +162,7 @@ public class DictionaryActivity extends AppCompatActivity {
                             (error) ->{  });
                     queue.add(request);
                     // Clear the search input field
-                    binding.editSearchWord.setText("");
+                    //binding.editSearchWord.setText("");
 
                 } catch (UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
@@ -249,28 +261,62 @@ public class DictionaryActivity extends AppCompatActivity {
                 break;
 
             case R.id.saveButton:
-
-                // Get the currently selected word
-                SearchWord selectedWord = chatModel.selectedMessage.getValue();
-                messages.add(selectedWord);
-                myAdapter.notifyDataSetChanged();
-                Executor addthread = Executors.newSingleThreadExecutor();
-                addthread.execute(( ) -> {
-                    //this is on a background thread
-                    selectedWord.id = (int)mDAO.insertSearchWord(selectedWord); //get the ID from the database
-                    Log.d("TAG", "The id created is:" + selectedWord.id);
-                }); //the body of run()
-                Snackbar.make(this.findViewById(R.id.editSearchWord),"You added the term "
-                        +selectedWord.getWord(),Snackbar.LENGTH_LONG).show();
-                getSupportFragmentManager().popBackStack();
+                SearchWord addWord = chatModel.selectedMessage.getValue();
+                if (addWord != null) { // Check that the selected word is not null
+                    messages.add(addWord);
+                    myAdapter.notifyDataSetChanged();
+                    Executor addthread = Executors.newSingleThreadExecutor();
+                    addthread.execute(() -> {
+                        // Insert the word into the database on a background thread
+                        long wordId = mDAO.insertSearchWord(addWord); // Use the correct type 'long'
+                        addWord.setId(wordId); // Set the ID of the word with the correct type
+                        Log.d("TAG", "The id created is:" + wordId);
+                        runOnUiThread(() -> {
+                            Snackbar.make(binding.getRoot(), "Word saved to your word list: " + addWord.getWord(), Snackbar.LENGTH_LONG).show();
+                        });
+                    });
+                } else {
+                    Toast.makeText(this, "No word selected to save", Toast.LENGTH_SHORT).show();
+                }
                 break;
+
+
+//                if (tempSearchWord != null) {
+//                    Executor thread = Executors.newSingleThreadExecutor();
+//                    thread.execute(() -> {
+//                        long wordId = mDAO.insertSearchWord(tempSearchWord);
+//                        tempSearchWord.setId(wordId);
+//
+//                        // Switching to UI thread for Toast
+//                        runOnUiThread(() -> {
+//                            Toast.makeText(DictionaryActivity.this, "Word saved to your word list", Toast.LENGTH_SHORT).show();
+//                        });
+//                    });
+//                } else {
+//                    Toast.makeText(this, "No word selected to save", Toast.LENGTH_SHORT).show();
+//                }
+//                break;
 
             case R.id.about:
-                Toast.makeText(this,"Version 3.0, Created by Yuxuan Xie",Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setTitle("How to Use")
+                        .setMessage("To use this dictionary app, simply enter a word in the search " +
+                                "bar at the top and press the 'Search' button. The app will display " +
+                                "definitions fetched from the online dictionary. \n\nIf you wish to " +
+                                "save a word and its definitions for later review, you can click on " +
+                                "the 'Save' button after searching for a word. Your saved words can " +
+                                "be accessed in the 'Word List' section.")
+                        .setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss())
+                        .create()
+                        .show();
                 break;
-        }
 
-        return true;
+            case R.id.wordList:
+            Intent intent = new Intent(DictionaryActivity.this, SavedWords.class);
+            startActivity(intent);
+            break;
+
+    }return true;
     }
 
     class MyRowHolder extends RecyclerView.ViewHolder {

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">期末作业</string>
+    <string name="Insert_word">请输入单词</string>
+    <string name="Search">搜索</string>
+    <string name="About">使用指南</string>
+    <string name="Word_List">单词列表</string>
+
+</resources>
