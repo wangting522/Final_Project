@@ -4,5 +4,17 @@
     <string name="Search">搜索</string>
     <string name="About">使用指南</string>
     <string name="Word_List">单词列表</string>
-
+    <string name="delete_confirmation">您要删除这个词吗？</string>
+    <string name="delete_title">删除消息</string>
+    <string name="positive_button_yes">是</string>
+    <string name="negative_button_no">否</string>
+    <string name="undo_action">撤销</string>
+    <string name="message_deleted">消息已删除</string>
+    <string name="word_saved_notification">单词已保存到您的单词列表：%1$s</string>
+    <string name="no_word_selected">没有选择要保存的单词</string>
+    <string name="how_to_use_title">如何使用</string>
+    <string name="how_to_use_message">要使用这个字典应用，只需在顶部的搜索栏中输入一个词，然后按搜索按钮。
+        应用程序将显示从在线字典中获取的定义。\n\n如果您希望保存一个词及其定义以供以后查看，您可以在搜索词后点击保存
+        按钮。您可以在“单词列表”部分访问保存的单词。</string>
+    <string name="ok_button">好</string>
 </resources>

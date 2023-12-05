@@ -157,9 +157,9 @@ public class SavedWords extends AppCompatActivity {
         {
             case R.id.deleteButton:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Do you want to delete this word?");
-                builder.setTitle("Delete Message")
-                        .setPositiveButton("Yes", (dialog, cl) -> {
+                builder.setMessage(R.string.delete_confirmation);
+                builder.setTitle(R.string.delete_title)
+                        .setPositiveButton(R.string.positive_button_yes, (dialog, cl) -> {
                             // Get the selected message
                             SearchWord selectedMessage = saveModel.selectedMessage.getValue();
                             if (selectedMessage != null) {
@@ -173,8 +173,8 @@ public class SavedWords extends AppCompatActivity {
                                 savedAdapter.notifyDataSetChanged();
 
                                 // Show a Snackbar with an undo option
-                                Snackbar.make(binding.getRoot(), "Message deleted", Snackbar.LENGTH_LONG)
-                                        .setAction("Undo", clk2 -> {
+                                Snackbar.make(binding.getRoot(), R.string.message_deleted, Snackbar.LENGTH_LONG)
+                                        .setAction(R.string.undo_action, clk2 -> {
                                             // Insert the deleted message back to the database
                                             Executors.newSingleThreadExecutor().execute(() -> {
                                                 long id = mDAO.insertSearchWord(selectedMessage);
@@ -189,7 +189,7 @@ public class SavedWords extends AppCompatActivity {
                                         .show();
                             }
                         })
-                        .setNegativeButton("No", (dialog, cl) -> {})
+                        .setNegativeButton(R.string.negative_button_no, (dialog, cl) -> {})
                         .create().show();
                 break;
         }

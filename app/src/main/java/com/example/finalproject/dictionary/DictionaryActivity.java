@@ -50,18 +50,47 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
-
+/**
+ * Main activity for the dictionary application, providing user interface to search for words,
+ * display their definitions, save them to a local list, and manage saved entries.
+ */
 public class DictionaryActivity extends AppCompatActivity {
+    /**
+     * SearchRoomBinding object for data binding.
+     */
     ActivityDictionaryBinding binding;
+    /**
+     * ArrayList to store SearchTerm objects representing search results.
+     */
     ArrayList<SearchWord> messages = null;
+    /**
+     * ViewModel for managing data related to search.
+     */
     SearchViewModel chatModel ;
+    /**
+     * Data Access Object for Room database.
+     */
     SearchWordDAO mDAO;
+    /**
+     * Adapter for the RecyclerView displaying search results and saved terms.
+     */
     RecyclerView.Adapter<MyRowHolder> myAdapter = null;
+    /**
+     * RequestQueue for managing Volley network requests.
+     */
     RequestQueue queue = null;
     private SearchWord tempSearchWord;
 
 
-
+    /**
+     * Initializes the activity, sets up the user interface, and initializes components.
+     * This method sets up the toolbar, RecyclerView, database connection, and ViewModel.
+     * It also handles the restoration of saved instance state if applicable.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle),
+     *                           which is null if no data was supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,9 +211,19 @@ public class DictionaryActivity extends AppCompatActivity {
             transaction.replace(R.id.fragmentLocation,dictionaryFragment);
             transaction.commit();
         });
-
+        /**
+         * Adapter for the RecyclerView displaying search results and saved terms in the
+         * DictionaryActivity. The adapter binds the data to the RecyclerView and handles the creation of ViewHolder objects.
+         */
         binding.recyclerView.setAdapter(
                 myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+            /**
+            * Called when RecyclerView needs a new ViewHolder of the given type to represent an item.
+            *
+            * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position.
+            * @param viewType The view type of the new View.
+            * @return A new ViewHolder that holds a View of the given view type.
+            */
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -193,7 +232,13 @@ public class DictionaryActivity extends AppCompatActivity {
 
                 return new MyRowHolder(binding.getRoot()); // getRoot returns a ConstraintLayout with TextViews inside
             }
-
+            /**
+            * Called by RecyclerView to display the data at the specified position.
+            *
+            * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position
+            *                 in the data set.
+            * @param position The position of the item within the adapter's data set.
+            */
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 SearchWord searchWord = messages.get(position);
@@ -201,7 +246,11 @@ public class DictionaryActivity extends AppCompatActivity {
 
                 holder.definitionText.setText(searchWord.getDefinition());
             }
-
+            /**
+            * Returns the total number of items in the data set held by the adapter.
+            *
+            * @return The total number of items in this adapter.
+            */
             @Override
             public int getItemCount() {
                 return messages.size();
@@ -209,14 +258,25 @@ public class DictionaryActivity extends AppCompatActivity {
         });
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
+    /**
+     * Inflates the menu for the activity to add items to the action bar.
+     *
+     * @param menu The options menu in which the items are placed.
+     * @return True for the menu to be displayed, false otherwise.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.dic_menu, menu);
         return true;
     }
-
+    /**
+     * Handles the selection of a menu item.
+     * This method performs actions such as deleting a word or saving a word based on the menu item selected.
+     *
+     * @param item The menu item that was selected by the user.
+     * @return True if the event was handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch( item.getItemId() )
@@ -224,9 +284,9 @@ public class DictionaryActivity extends AppCompatActivity {
             case R.id.deleteButton:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Do you want to delete this word?");
-                builder.setTitle("Delete Message")
-                        .setPositiveButton("Yes", (dialog, cl) -> {
+                builder.setMessage(R.string.delete_confirmation);
+                builder.setTitle(R.string.delete_title)
+                        .setPositiveButton(R.string.positive_button_yes, (dialog, cl) -> {
                             // Get the selected message
                             SearchWord selectedMessage = chatModel.selectedMessage.getValue();
                             if (selectedMessage != null) {
@@ -240,8 +300,8 @@ public class DictionaryActivity extends AppCompatActivity {
                                 myAdapter.notifyDataSetChanged();
 
                                 // Show a Snackbar with an undo option
-                                Snackbar.make(binding.getRoot(), "Message deleted", Snackbar.LENGTH_LONG)
-                                        .setAction("Undo", clk2 -> {
+                                Snackbar.make(binding.getRoot(), R.string.message_deleted, Snackbar.LENGTH_LONG)
+                                        .setAction(R.string.undo_action, clk2 -> {
                                             // Insert the deleted message back to the database
                                             Executors.newSingleThreadExecutor().execute(() -> {
                                                 long id = mDAO.insertSearchWord(selectedMessage);
@@ -256,7 +316,7 @@ public class DictionaryActivity extends AppCompatActivity {
                                         .show();
                             }
                         })
-                        .setNegativeButton("No", (dialog, cl) -> {})
+                        .setNegativeButton(R.string.negative_button_no, (dialog, cl) -> {})
                         .create().show();
                 break;
 
@@ -272,41 +332,21 @@ public class DictionaryActivity extends AppCompatActivity {
                         addWord.setId(wordId); // Set the ID of the word with the correct type
                         Log.d("TAG", "The id created is:" + wordId);
                         runOnUiThread(() -> {
-                            Snackbar.make(binding.getRoot(), "Word saved to your word list: " + addWord.getWord(), Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(binding.getRoot(), R.string.word_saved_notification + addWord.getWord(), Snackbar.LENGTH_LONG).show();
                         });
                     });
                 } else {
-                    Toast.makeText(this, "No word selected to save", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.no_word_selected, Toast.LENGTH_SHORT).show();
                 }
                 break;
 
 
-//                if (tempSearchWord != null) {
-//                    Executor thread = Executors.newSingleThreadExecutor();
-//                    thread.execute(() -> {
-//                        long wordId = mDAO.insertSearchWord(tempSearchWord);
-//                        tempSearchWord.setId(wordId);
-//
-//                        // Switching to UI thread for Toast
-//                        runOnUiThread(() -> {
-//                            Toast.makeText(DictionaryActivity.this, "Word saved to your word list", Toast.LENGTH_SHORT).show();
-//                        });
-//                    });
-//                } else {
-//                    Toast.makeText(this, "No word selected to save", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
 
             case R.id.about:
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                builder1.setTitle("How to Use")
-                        .setMessage("To use this dictionary app, simply enter a word in the search " +
-                                "bar at the top and press the 'Search' button. The app will display " +
-                                "definitions fetched from the online dictionary. \n\nIf you wish to " +
-                                "save a word and its definitions for later review, you can click on " +
-                                "the 'Save' button after searching for a word. Your saved words can " +
-                                "be accessed in the 'Word List' section.")
-                        .setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss())
+                builder1.setTitle(R.string.how_to_use_title)
+                        .setMessage(R.string.how_to_use_message)
+                        .setPositiveButton(R.string.ok_button, (dialogInterface, i) -> dialogInterface.dismiss())
                         .create()
                         .show();
                 break;
@@ -318,12 +358,19 @@ public class DictionaryActivity extends AppCompatActivity {
 
     }return true;
     }
-
+    /**
+     * ViewHolder class for RecyclerView to manage the views for each item in the list.
+     * It holds references to all the UI components within the list item layout, such as TextViews.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
 
         public TextView messageText;
         public TextView definitionText;
-
+        /**
+         * Constructor for the ViewHolder, with a click listener that handles item selection.
+         *
+         * @param itemView The view of the individual list item.
+         */
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
 
