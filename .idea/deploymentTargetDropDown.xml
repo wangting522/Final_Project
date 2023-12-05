@@ -7,11 +7,19 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
+<<<<<<< HEAD
             <value value="C:\Users\frwu2\.android\avd\Pixel_4_XL_API_27.avd" />
+=======
+            <value value="C:\Users\aaydo\.android\avd\Pixel_4_API_34.avd" />
+>>>>>>> Deezer
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
+<<<<<<< HEAD
     <timeTargetWasSelectedWithDropDown value="2023-12-05T04:12:44.822354600Z" />
+=======
+    <timeTargetWasSelectedWithDropDown value="2023-12-05T18:58:00.314307500Z" />
+>>>>>>> Deezer
   </component>
 </project>
