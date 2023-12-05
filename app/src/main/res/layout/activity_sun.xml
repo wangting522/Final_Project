@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome" />
+
+    <EditText
+        android:id="@+id/locationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Entering the location:" />
+
+    <EditText
+        android:id="@+id/latitudeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Entering the latitude:" />
+
+    <EditText
+        android:id="@+id/longitudeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Entering the longitude:" />
+
+    <Button
+        android:id="@+id/lookupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/search_name" />
+
+    <TextView
+        android:id="@+id/sunriseTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sunrise goes here"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/sunsetTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sunset goes here"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/saveLocationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_name"
+        android:layout_marginTop="32dp" />
+
+    <Button
+        android:id="@+id/viewFavoritesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/view_name"
+        android:layout_marginTop="32dp" />
+
+
+</LinearLayout>

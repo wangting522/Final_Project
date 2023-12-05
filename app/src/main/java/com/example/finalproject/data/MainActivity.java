@@ -16,14 +16,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-  /*      // Set onClick listeners for each button using binding
+      // Set onClick listeners for each button using binding
         binding.sunButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SunActivity.class);
             startActivity(intent);
         });
 
 
-
+ /*
         binding.dictionaryButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
             startActivity(intent);
