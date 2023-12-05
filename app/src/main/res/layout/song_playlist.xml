@@ -13,10 +13,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/songToolsP"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="24dp"
         android:src="@drawable/dots"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/songName" />
@@ -25,8 +27,10 @@
         android:id="@+id/songName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="Song name goes here"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="43px"
         app:layout_constraintStart_toEndOf="@+id/albumCoverSP"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,22 +39,24 @@
         android:id="@+id/artistName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:text="artist name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="35px"
         app:layout_constraintStart_toEndOf="@+id/albumCoverSP"
         app:layout_constraintTop_toBottomOf="@+id/songName" />
-
 
     <TextView
         android:id="@+id/duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="68dp"
         android:text="song duration goes here"
+        android:textColor="@color/black"
         android:textSize="35px"
         app:layout_constraintEnd_toStartOf="@+id/songToolsP"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/white"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

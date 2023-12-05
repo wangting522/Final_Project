@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "C:\\Users\\aaydo\\AppData\\Local\\Android\\Sdk\\platforms\\android-34", "include" to listOf("*.aar", "*.jar"), "exclude" to listOf())))
     val room_version = "2.6.0"
     implementation ("androidx.room:room-runtime:$room_version")
     annotationProcessor ("androidx.room:room-compiler:$room_version")

@@ -38,8 +38,14 @@ import java.util.ArrayList;
 
 import com.example.finalproject.databinding.AlbumBinding;
 import com.example.finalproject.databinding.DeezerBinding;
+
+/**
+ * The Deezer class represents an activity in the application that allows users to search for
+ * albums using the Deezer API. It displays a list of albums retrieved from the API, and users
+ * can click on an album to view its details, including the list of songs in the album.
+ */
 public class Deezer extends AppCompatActivity{
-//?Attributes
+//Attributes
 
     /**
      * Initialize the Adapter for the Recycle view
@@ -74,6 +80,14 @@ public class Deezer extends AppCompatActivity{
 
     protected Bitmap albumCover;
 
+    /**
+     * Called when the activity is first created. Initializes UI components, sets up the toolbar,
+     * and handles actions such as searching for albums and viewing album details.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     *                           shut down, this Bundle contains the data it most recently
+     *                           supplied in onSaveInstanceState. Otherwise, it is null.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DeezerBinding.inflate(getLayoutInflater());
@@ -87,7 +101,7 @@ public class Deezer extends AppCompatActivity{
         /**
          * Set the toolbar
          */
-        setTitle("Welcome to Deezer");
+        setTitle(R.string.welcome_msg);
         androidx.appcompat.widget.Toolbar toolBar = (binding.toolbar);
         setSupportActionBar(toolBar);
 
@@ -274,7 +288,8 @@ public class Deezer extends AppCompatActivity{
     //TODO Set Album row holder
 
     /**
-     * Represents the data that will be displayed on the Recycle view in the Album list layout
+     * ViewHolder class for representing individual items (albums) in the RecyclerView.
+     * Provides a bind method to populate the views with album data.
      */
     class MyAlbumHolder extends RecyclerView.ViewHolder {
 
@@ -297,6 +312,11 @@ public class Deezer extends AppCompatActivity{
             imageView = itemView.findViewById(R.id.albumCover);
         }
 
+        /**
+         * Binds the album data to the views within the ViewHolder.
+         *
+         * @param deezerAlbum The DeezerAlbum object containing information about the album.
+         */
         public void bind(DeezerAlbum deezerAlbum) {
             albumName.setText(deezerAlbum.getTitle());
             artistName.setText(deezerAlbum.getArtistName());
@@ -328,6 +348,12 @@ public class Deezer extends AppCompatActivity{
         }
     }
 
+    /**
+     * Initializes the options menu in the app bar.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return true for the menu to be displayed; false for it to be hidden.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -335,7 +361,12 @@ public class Deezer extends AppCompatActivity{
         return true;
     }
 
-
+    /**
+     * Called when a menu item is selected. Handles actions based on the selected menu item.
+     *
+     * @param item The menu item that was selected.
+     * @return true to consume the event here; false to allow normal menu processing to proceed.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -354,4 +385,5 @@ public class Deezer extends AppCompatActivity{
     }
 
 }
+
 

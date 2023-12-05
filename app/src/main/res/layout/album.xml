@@ -16,7 +16,7 @@
         android:text="Song name goes here"
         app:layout_constraintStart_toEndOf="@+id/albumCover"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/artistName"
@@ -27,7 +27,7 @@
         android:text="artist name"
         app:layout_constraintStart_toEndOf="@+id/albumCover"
         app:layout_constraintTop_toBottomOf="@+id/albumName"
-        android:textColor="@color/white"/>
+        android:textColor="@color/black"/>
 
     <ImageView
         android:id="@+id/albumCover"
@@ -36,13 +36,5 @@
         android:src="@drawable/loading"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <!--    <androidx.appcompat.widget.Toolbar-->
-    <!--        android:id="@+id/albumBar"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="@android:dimen/app_icon_size"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

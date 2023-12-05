@@ -48,6 +48,12 @@ import com.example.finalproject.databinding.ActivityPlaylistBinding;
 import com.example.finalproject.databinding.SongPlaylistBinding;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * The Playlist class represents an activity in the application that displays and manages
+ * a playlist of songs. It utilizes the SongsAdapter to populate a RecyclerView with songs,
+ * and allows users to perform actions such as searching for songs, deleting songs from the
+ * playlist, and previewing song previews.
+ */
 public class Playlist extends AppCompatActivity {
     private RecyclerView.Adapter myAdapter;
     private RecyclerView recyclerView;
@@ -58,13 +64,22 @@ public class Playlist extends AppCompatActivity {
     private List<Songs> songsList = new ArrayList<>();
     MediaPlayer mediaPlayer;
 
+    /**
+     * Called when the activity is first created. Initializes the UI components, sets up the
+     * toolbar, and handles various actions such as searching for songs, deleting songs, and
+     * previewing song previews.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     *                           shut down then this Bundle contains the data it most recently
+     *                           supplied in onSaveInstanceState. Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPlaylistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setTitle("Your Deezer Playlist");
+        setTitle(R.string.playlist_toolbar);
 
         setSupportActionBar(binding.toolbar);
 
@@ -129,7 +144,10 @@ public class Playlist extends AppCompatActivity {
 
     }
 
-
+    /**
+     * ViewHolder class for representing individual items (songs) in the RecyclerView.
+     * Provides a bind method to populate the views with song data.
+     */
     public class SongsViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TextView artistTextView;
@@ -147,7 +165,11 @@ public class Playlist extends AppCompatActivity {
             songsPlaylist = itemView.findViewById(R.id.songToolsP);
 
         }
-
+        /**
+         * Binds the song data to the views within the ViewHolder.
+         *
+         * @param songs The Songs object containing information about the song.
+         */
         public void bind(Songs songs) {
             titleTextView.setText(songs.getTitle());
             artistTextView.setText(songs.getArtistName());
@@ -181,7 +203,12 @@ public class Playlist extends AppCompatActivity {
                 queue.add(imgReq);
             }
         }
-
+        /**
+         * Formats the duration of a song in minutes and seconds.
+         *
+         * @param duration The duration of the song in seconds.
+         * @return A formatted string representing the duration (mm:ss).
+         */
         private String formatDuration(int duration) {
             int minutes = duration / 60;
             int seconds = duration % 60;
@@ -194,12 +221,22 @@ public class Playlist extends AppCompatActivity {
 
         private List<Songs> songsList;
 
+        /**
+         * Adapter class for the RecyclerView, responsible for creating ViewHolders and binding data.
+         */
         SongsAdapter(List<Songs> songsList) {
             this.songsList = songsList;
         }
 
 
-
+        /**
+         * Called when RecyclerView needs a new ViewHolder of the given type to represent
+         * an item.
+         *
+         * @param parent   The ViewGroup into which the new View will be added.
+         * @param viewType The view type of the new View.
+         * @return A new SongsViewHolder that holds a View representing an item.
+         */
         @NonNull
         @Override
         public SongsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -207,6 +244,13 @@ public class Playlist extends AppCompatActivity {
             return new SongsViewHolder(playlistBinding.getRoot());
         }
 
+        /**
+         * Called to bind the ViewHolder to a position in the RecyclerView.
+         *
+         * @param holder   The ViewHolder which should be updated to represent the contents
+         *                 of the item at the given position.
+         * @param position The position of the item within the adapter's data set.
+         */
         @Override
         public void onBindViewHolder(@NonNull SongsViewHolder holder, int position) {
             SongsDatabase songsDatabase = Room.databaseBuilder(getApplicationContext(), SongsDatabase.class, "deezerDB").build();
@@ -326,18 +370,35 @@ public class Playlist extends AppCompatActivity {
             }
         }
 
+        /**
+         * Gets the total number of items in the data set held by the adapter.
+         *
+         * @return The total number of items in this adapter.
+         */
         @Override
         public int getItemCount() {
             return songsList.size();
         }
     }
 
+    /**
+     * Initializes the options menu in the app bar.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return true for the menu to be displayed; false for it to be hidden.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.deezer_menu, menu);
         return true;
     }
 
+    /**
+     * Called when a menu item is selected. Handles actions based on the selected menu item.
+     *
+     * @param item The menu item that was selected.
+     * @return true to consume the event here; false to allow normal menu processing to proceed.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

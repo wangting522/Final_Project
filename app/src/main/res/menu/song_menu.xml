@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <item android:title="Preview Song"
+    <item android:title="@string/preview"
         android:id="@+id/songPreview"
         />
 
-    <item android:title="Add to Playlist"
+    <item android:title="@string/add_playlist"
         android:id="@+id/addToPlaylist"/>
 </menu>

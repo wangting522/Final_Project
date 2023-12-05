@@ -38,6 +38,12 @@ import java.util.concurrent.Executors;
 import com.example.finalproject.databinding.AlbumlistLayoutBinding;
 import com.example.finalproject.databinding.SongBinding;
 
+    /**
+     * The AlbumDetailFragment class represents a fragment that displays details of a Deezer album,
+     * including its name, artist, cover, and a list of songs. Users can interact with the songs, add
+     * them to the playlist, and preview them.
+     */
+
     public class AlbumDetailFragment extends Fragment {
         AlbumlistLayoutBinding albumlistLayoutBinding;
         private RecyclerView recyclerView;
@@ -49,13 +55,27 @@ import com.example.finalproject.databinding.SongBinding;
         SongsViewModel songModel;
         DeezerAlbum album;
 
-        //* Transfer DeezerAlbum object to the fragment
+        /**
+         * Constructs an AlbumDetailFragment with the given list of songs, DeezerAlbum, and RequestQueue.
+         *
+         * @param songsList The list of songs to display.
+         * @param album     The DeezerAlbum to display details.
+         * @param queue     The RequestQueue for making network requests.
+         */
         public AlbumDetailFragment(List<Songs> songsList, DeezerAlbum album, RequestQueue queue) {
             this.songsList = songsList;
             this.album = album;
             this.queue = queue;
         }
 
+        /**
+         * Called to have the fragment instantiate its user interface view.
+         *
+         * @param inflater           The LayoutInflater object that can be used to inflate views.
+         * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+         * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+         * @return The View for the fragment's UI.
+         */
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -107,7 +127,9 @@ import com.example.finalproject.databinding.SongBinding;
         }
 
 
-        //* Inner class for SongsViewHolder
+        /**
+         * Inner class representing a ViewHolder for songs in the RecyclerView.
+         */
         public class SongsViewHolder extends RecyclerView.ViewHolder {
             TextView titleTextView;
             TextView artistTextView;
@@ -125,7 +147,9 @@ import com.example.finalproject.databinding.SongBinding;
         }
 
 
-        // Inner class for SongsAdapter
+        /**
+         * Inner class representing the Adapter for the RecyclerView of songs.
+         */
         class SongsAdapter extends RecyclerView.Adapter<SongsViewHolder> {
 
             private List<Songs> songsList;

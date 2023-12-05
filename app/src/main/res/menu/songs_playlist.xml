@@ -6,7 +6,7 @@
     <item
         android:id="@+id/preview"
         android:icon="@drawable/play"
-        android:title="Preview Song"
+        android:title="@string/preview"
         app:showAsAction="always" />
 
     <item

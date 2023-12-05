@@ -17,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Set onClick listeners for each button using binding
-        binding.sunButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SunActivity.class);
-            startActivity(intent);
-        });
+//        binding.sunButton.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, SunActivity.class);
+//            startActivity(intent);
+//        });
 
 
 
