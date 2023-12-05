@@ -13,10 +13,7 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
-            android:name=".DictionaryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".data.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +22,27 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SunActivity" />
-        <activity android:name=".FavoritesActivity" />
+        <activity
+            android:name=".data.RecipeMainActivity" />
+
+        <activity
+            android:name=".data.RecipeSearchActivity"
+            />
+        <activity
+            android:name=".data.AboutMeActivity"
+            />
+        <activity
+            android:name=".data.SearchEmptyActivity"
+            />
+
+        <activity
+            android:name=".data.FavEmptyActivity"
+            />
+        <activity
+            android:name=".data.RecipeFavActivity"/>
+
+        <activity android:name=".data.SunActivity" />
+        <activity android:name=".data.FavoritesActivity" />
 
     </application>
 

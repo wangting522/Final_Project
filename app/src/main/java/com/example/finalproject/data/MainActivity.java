@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.data;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -16,14 +16,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Set onClick listeners for each button using binding
+  /*      // Set onClick listeners for each button using binding
         binding.sunButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SunActivity.class);
             startActivity(intent);
         });
 
 
-/*
+
         binding.dictionaryButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
             startActivity(intent);
@@ -33,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SongActivity.class);
             startActivity(intent);
         });
-
+*/
         binding.recipeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
+            Intent intent = new Intent(MainActivity.this, RecipeMainActivity.class);
             startActivity(intent);
         });
 
-*/
+
         Log.w("MainActivity", "In onCreate() - Loading Widgets");
     }
     @Override
