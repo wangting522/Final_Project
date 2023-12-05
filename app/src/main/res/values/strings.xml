@@ -1,14 +1,7 @@
 <resources>
-<<<<<<< HEAD
-
-
     <string name="app_name">Android Final</string>
-
     <string name="ButtonText">Button</string>
-
-
     <string name="authors">Author: Mohamed Attia</string>
-
     <string name="recipeSearchButtonText">Search</string>
     <string name="recipeSearchEditText">What are you looking for?</string>
     <string name="applicationName">Android App </string>
@@ -16,22 +9,18 @@
     <string name="recipeVersion">Ver 0.3 beta</string>
     <string name="recipeapp">Recipe API</string>
     <string name="information"> Information</string>
-
     <string name="mainHelp">Click button to start Searching! Or click the star on the toolbar to go directly to your Favorites</string>
     <string name="searchHelp">Input the ingredient you want to search and click on the search button. The results would be displayed in a list. </string>
     <string name="aboutHelp">This is the information about this app and the author</string>
     <string name="favHelp">Input the ingredient you want to search in favorite and click on the filter button. The results would be displayed in list. Long click can delete it from favorite.</string>
     <string name="favDetailHelp">Click the heart button to delete the recipe from your favorite</string>
     <string name="searchDetailHelp">Click the heart button to add the recipe to your favorite</string>
-
     <string name="navigation_drawer_open">open navigation drawer</string>
     <string name="navigation_drawer_close">close navigation drawer</string>
     <string name="about_me_title">About me</string>
     <string name="about_body">This application, developed as the culmination of CST2335 by Mohamed Attia, \n\nThe app is for recipe searching.
         By entering an ingredient in the search bar, it will generate the search result. You can add it to your favorite for later use. The app has also an about me page
         as well as help to guide the use of the app.</string>
-
-    <!--    titles-->
     <string name="search_title">Search</string>
     <string name="fav_title">My Favorite</string>
     <string name="about_title">Information</string>
@@ -50,20 +39,13 @@
     <string name="favSearchCount"> Result(s) found in your favorite!</string>
     <string name="favAdded">Added to Favorites</string>
     <string name="favRemoved">Removed from Favorites</string>
-
     <string name="drawer_home">Home</string>
     <string name="drawer_search">Search</string>
     <string name="drawer_fav">Favorite</string>
     <string name="drawer_help">Help</string>
     <string name="drawer_aboutme">About me</string>
-
-
-</resources>
-=======
-    <string name="app_name">Final Project</string>
     <string name="search_name">Lookup</string>
     <string name="save_name">Save Location</string>
     <string name="view_name">View Favorites</string>
     <string name="welcome">Welcome!</string>
 </resources>
->>>>>>> Sunny
