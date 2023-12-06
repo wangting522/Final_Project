@@ -44,7 +44,9 @@ public class RecipeDetailFragment extends Fragment {
     private TextView detailTextView;
 
     private RecipeEntry recipe;
-
+    /**
+     * AsyncTask to fetch recipe details from the Spoonacular API.
+     */
     private class FetchRecipeDetail extends AsyncTask<Long, Integer, String> {
         private final String urlTemplate = "https://api.spoonacular.com/recipes/%s/summary?apiKey=2311513282b7432684777caf629d344a";
 
@@ -99,7 +101,14 @@ public class RecipeDetailFragment extends Fragment {
         }
 
     }
-
+    /**
+     * Creates and initializes the view for the Recipe Detail Fragment.
+     *
+     * @param inflater           LayoutInflater to inflate the layout
+     * @param container          ViewGroup to contain the layout
+     * @param savedInstanceState Bundle containing the saved state
+     * @return The inflated view for the fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -145,7 +154,9 @@ public class RecipeDetailFragment extends Fragment {
 
         return detailLayout;
     }
-
+    /**
+     * Updates the favorite button icon based on the recipe's favorited status.
+     */
     private void updateIcon() {
         RecipeDatabaseHelper helper = new RecipeDatabaseHelper(getActivity());
         if (RecipeDAO.isExist(helper, recipe.id)) {

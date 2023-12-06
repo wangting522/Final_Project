@@ -23,7 +23,9 @@ import com.example.finalproject.R;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-
+/**
+ * Activity displaying favorite recipes.
+ */
 public class RecipeFavActivity extends AppCompatActivity {
 
     private Toolbar toolbar;

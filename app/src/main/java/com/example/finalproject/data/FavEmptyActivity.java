@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.finalproject.R;
-
+/**
+ * Activity class for displaying an empty favorite recipe.
+ */
 public class FavEmptyActivity extends AppCompatActivity {
 
     @Override

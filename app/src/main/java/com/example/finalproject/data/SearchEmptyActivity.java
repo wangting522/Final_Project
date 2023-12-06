@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.finalproject.R;
-
+/**
+ * An activity representing the search screen when it contains no items.
+ */
 public class SearchEmptyActivity extends AppCompatActivity {
 
     @Override

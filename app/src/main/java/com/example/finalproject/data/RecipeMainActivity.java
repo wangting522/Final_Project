@@ -22,11 +22,15 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 /**
- *
+ * This class represents the main activity for handling recipes.
  */
 public class RecipeMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-
+    /**
+     * Method invoked when creating the activity.
+     *
+     * @param savedInstanceState A Bundle instance
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +67,12 @@ public class RecipeMainActivity extends AppCompatActivity implements NavigationV
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
+    /**
+     * Method invoked when a navigation item is selected.
+     *
+     * @param item The selected MenuItem
+     * @return true if the event was handled, false otherwise
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item){
 
@@ -98,12 +107,24 @@ public class RecipeMainActivity extends AppCompatActivity implements NavigationV
 
         return false;
     }
+    /**
+     * Inflates the menu and adds items to the action bar if it is present.
+     *
+     * @param menu The menu to inflate
+     * @return true if the menu is inflated successfully, false otherwise
+     */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.accessible_toolbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
+    /**
+     * Method invoked when an item in the action bar is selected.
+     *
+     * @param item The selected MenuItem
+     * @return true if the event was handled, false otherwise
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

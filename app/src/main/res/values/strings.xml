@@ -7,7 +7,7 @@
     <string name="recipeSearchEditText">What are you looking for?</string>
     <string name="applicationName">Android App </string>
     <string name="recipeMainButton">Search Recipes!</string>
-    <string name="recipeVersion">Ver 0.3 beta</string>
+    <string name="recipeVersion">Ver 0.4 beta</string>
     <string name="recipeapp">Recipe API</string>
     <string name="information"> Information</string>
     <string name="mainHelp">Click button to start Searching! Or click the star on the toolbar to go directly to your Favorites</string>
@@ -50,7 +50,7 @@
     <string name="view_name">View Favorites</string>
     <string name="welcome">Welcome!</string>
     <string name="search_bar">Search for Artist/Song Here</string>
-    <string name="welcome_msg">Welcome to Deezer</string>
+    <string name="welcome_msg">Welcome</string>
     <string name="search">Search</string>
     <string name="preview">Preview Song</string>
     <string name="add_playlist">Add to Playlist</string>

@@ -34,7 +34,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- *
+ * This activity allows users to search for recipes by ingredients.
  */
 public class RecipeSearchActivity extends AppCompatActivity {
 
@@ -50,7 +50,9 @@ public class RecipeSearchActivity extends AppCompatActivity {
 
     private ArrayList<RecipeEntry> recipes = new ArrayList<RecipeEntry>();
     private String rawJson;
-
+    /**
+     * AsyncTask to fetch the list of recipes based on user-entered ingredients.
+     */
     private class FetchRecipeList extends AsyncTask<String, Integer, String> {
 
         private final String urlTemplate = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=2311513282b7432684777caf629d344a&number=10&ingredients=%s";
@@ -113,7 +115,12 @@ public class RecipeSearchActivity extends AppCompatActivity {
         }
 
     }
-
+    /**
+     * Called when the activity is created.
+     * Initializes UI components and sets listeners.
+     *
+     * @param savedInstanceState The saved instance state bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,7 +178,10 @@ public class RecipeSearchActivity extends AppCompatActivity {
         }
 
     }
-
+    /**
+     * Called when the activity is destroyed.
+     * Cleans up any resources used by the activity.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -181,7 +191,10 @@ public class RecipeSearchActivity extends AppCompatActivity {
         editor.putString("search_keyword", searchText.getText().toString());
         editor.commit();
     }
-
+    /**
+     * Called when the activity is paused.
+     * Saves data or state changes as necessary.
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -191,7 +204,10 @@ public class RecipeSearchActivity extends AppCompatActivity {
         editor.putString("search_keyword", searchText.getText().toString());
         editor.commit();
     }
-
+    /**
+     * Called when the activity is resumed.
+     * Restores data or state changes as necessary.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -216,7 +232,12 @@ public class RecipeSearchActivity extends AppCompatActivity {
         list.setAdapter(adapter);
         list.deferNotifyDataSetChanged();
     }
-
+    /**
+     * Creates the options menu in the app bar.
+     *
+     * @param menu The menu object to inflate
+     * @return True to display the menu, false otherwise
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate the menu; this adds items to the app bar.
@@ -224,7 +245,12 @@ public class RecipeSearchActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
-
+    /**
+     * Handles menu item selection in the app bar.
+     *
+     * @param item The selected menu item
+     * @return True if the menu item selection is handled, false otherwise
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
