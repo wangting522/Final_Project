@@ -21,6 +21,9 @@ import com.example.finalproject.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+/**
+ *
+ */
 public class RecipeMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 

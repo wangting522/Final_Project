@@ -33,6 +33,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class RecipeSearchActivity extends AppCompatActivity {
 
     private Toolbar toolbar;

@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.example.finalproject.R;
 
+/**
+ *
+ */
 public class AboutMeActivity extends AppCompatActivity {
 
 
