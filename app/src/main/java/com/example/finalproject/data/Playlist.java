@@ -398,16 +398,18 @@ public class Playlist extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        switch(item.getItemId()) {
             case R.id.sunrise:
-                // startActivity(new Intent(this, Sunrise.class));
+                Intent sunIntent = new Intent(this, SunActivity.class);
+                startActivity(sunIntent);
                 break;
             case R.id.dictionary:
-                // startActivity(new Intent(this, dictionary.class));
+                startActivity(new Intent(this, DictionaryActivity.class));
                 break;
             case R.id.recipe:
-                // startActivity(new Intent(this, dictionary.class));
+                startActivity(new Intent(this, RecipeMainActivity.class));
                 break;
         }
-        return true;}
+        return true;
+    }
 }

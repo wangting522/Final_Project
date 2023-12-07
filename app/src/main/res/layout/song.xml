@@ -8,10 +8,12 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/songTools"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="107dp"
+        android:layout_height="45dp"
         android:src="@drawable/dots"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toEndOf="@+id/duration"
         app:layout_constraintTop_toTopOf="@+id/songName" />
 
     <TextView
@@ -38,14 +40,14 @@
 
     <TextView
         android:id="@+id/duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="120dp"
+        android:layout_width="164dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="24dp"
         android:text="song duration goes here"
         android:textColor="@color/black"
         android:textSize="40px"
-        app:layout_constraintEnd_toStartOf="@+id/songTools"
+        app:layout_constraintStart_toEndOf="@+id/artistName"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

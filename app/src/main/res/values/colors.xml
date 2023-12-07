@@ -7,5 +7,6 @@
     <color name="my_text">#FF000000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#53D2F8</color>
 
 </resources>
