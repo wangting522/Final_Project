@@ -1,5 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="welcome">أهلاً وسهلاً</string>
-
+    <string name="app_name">الروبوت النهائي</string>
+    <string name="ButtonText">زر</string>
+    <string name="authors">المؤلف: محمد عطية</string>
+    <string name="recipeSearchButtonText">بحث</string>
+    <string name="recipeSearchEditText">ما الذي تبحث عنه؟</string>
+    <string name="applicationName">تطبيق الأندرويد</string>
+    <string name="recipeMainButton">ابحث عن وصفات!</string>
+    <string name="recipeVersion">الإصدار 0.4 بيتا</string>
+    <string name="recipeapp">API الوصفات</string>
+    <string name="information"> المعلومات</string>
+    <string name="mainHelp">انقر على الزر لبدء البحث! أو انقر على النجمة في شريط الأدوات للانتقال مباشرة إلى المفضلة الخاصة بك</string>
+    <string name="searchHelp">أدخل المكون الذي تريد البحث عنه وانقر على زر البحث. سيتم عرض النتائج في قائمة.</string>
+    <string name="aboutHelp">هذه هي المعلومات حول هذا التطبيق والمؤلف</string>
+    <string name="favHelp">أدخل المكون الذي تريد البحث عنه في المفضلة وانقر على زر الفلترة. ستظهر النتائج في القائمة. يمكن حذفها من المفضلة بالنقر المطول.</string>
+    <string name="favDetailHelp">انقر على زر القلب لحذف الوصفة من المفضلة الخاصة بك</string>
+    <string name="searchDetailHelp">انقر على زر القلب لإضافة الوصفة إلى المفضلة الخاصة بك</string>
+    <string name="navigation_drawer_open">فتح القائمة الجانبية</string>
+    <string name="navigation_drawer_close">إغلاق القائمة الجانبية</string>
+    <string name="about_me_title">حولي</string>
+    <string name="about_body">تم تطوير هذا التطبيق كتتويج لـ CST2335 من قبل محمد عطية، \n\nالتطبيق للبحث عن الوصفات.
+        من خلال إدخال مكون في شريط البحث، سيقوم بتوليد نتيجة البحث. يمكنك إضافته إلى المفضلة الخاصة بك للاستخدام لاحقًا. للتطبيق أيضًا صفحة حولي
+        وكذلك مساعدة لتوجيه استخدام التطبيق.</string>
+    <string name="search_title">بحث</string>
+    <string name="fav_title">المفضلة</string>
+    <string name="about_title">المعلومات</string>
+    <string name="detail_title">وصفة</string>
+    <string name="search_hint">ابحث بواسطة المكون</string>
+    <string name="favSearchHint">البحث في المفضلة</string>
+    <string name="favSearchButton">فلترة</string>
+    <string name="homeToast">أنت في الصفحة الرئيسية!</string>
+    <string name="searchToast">أنت تبحث!</string>
+    <string name="favToast">أنا في المفضلة الخاصة بك!</string>
+    <string name="aboutToast">أنت في صفحة المعلومات!</string>
+    <string name="lastSearchPrompt">بحثك الأخير هو: </string>
+    <string name="firstSearchPrompt">ابدأ بحثًا جديدًا!</string>
+    <string name="favLastSearchPrompt">بحثك الأخير في المفضلة هو: </string>
+    <string name="favFirstSearchPrompt">مرحبًا بك في بحثك الأول في المفضلة!</string>
+    <string name="favSearchCount"> النتيجة(النتائج) وجدت في مفضلتك!</string>
+    <string name="favAdded">تمت إضافته إلى المفضلة</string>
+    <string name="favRemoved">تمت إزالته من المفضلة</string>
+    <string name="drawer_home">الصفحة الرئيسية</string>
+    <string name="drawer_search">بحث</string>
+    <string name="drawer_fav">المفضلة</string>
+    <string name="drawer_help">مساعدة</string>
+    <string name="drawer_aboutme">حولي</string>
+    <string name="search_name">البحث</string>
+    <string name="save_name">حفظ الموقع</string>
+    <string name="view_name">عرض المفضلة</string>
+    <string name="welcome">مرحباً!</string>
 </resources>

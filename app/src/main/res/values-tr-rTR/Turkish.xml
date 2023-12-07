@@ -1,5 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="welcome">Hoş geldiniz</string>
-    
+    <string name="search_bar">Sanatçı/Şarkı için arama yapın</string>
+    <string name="welcome_msg">Hoş geldiniz</string>
+    <string name="search">Ara</string>
+    <string name="preview">Şarkı Önizlemesi</string>
+    <string name="add_playlist">Oynatma Listesine Ekle</string>
+    <string name="playlist_toolbar">Deezer Oynatma Listesi</string>
+    <string name="Insert_word">Kelime girin</string>
+    <string name="Search">Ara</string>
+    <string name="About">Hakkında</string>
+    <string name="Word_List">Kelime Listesi</string>
+    <string name="delete_confirmation">Bu kelimeyi silmek istiyor musunuz?</string>
+    <string name="delete_title">Mesajı Sil</string>
+    <string name="positive_button_yes">Evet</string>
+    <string name="negative_button_no">Hayır</string>
+    <string name="undo_action">Geri Al</string>
+    <string name="message_deleted">Mesaj silindi</string>
+    <string name="word_saved_notification">Kelime listenize kaydedildi: </string>
+    <string name="no_word_selected">Kaydedilecek kelime seçilmedi</string>
+    <string name="how_to_use_title">Nasıl Kullanılır</string>
+    <string name="how_to_use_message">Bu sözlük uygulamasını kullanmak için, sadece en üstteki arama çubuğuna bir kelime girin ve Ara düğmesine basın. Uygulama, çevrimiçi sözlükten alınan tanımları görüntüler. \n\nBir kelimeyi ve tanımlarını daha sonra incelemek üzere kaydetmek isterseniz, bir kelime aradıktan sonra Kaydet düğmesine tıklayabilirsiniz. Kaydedilen kelimelerinize Kelime Listesi bölümünden erişebilirsiniz.</string>
+    <string name="ok_button">Tamam</string>
 </resources>
