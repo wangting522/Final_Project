@@ -1,5 +1,5 @@
 <resources>
-    <string name="search_bar">Sanatçı/Şarkı için arama yapın</string>
+    <string name ="search_bar">Sanatçı/Şarkı için arama yapın</string>
     <string name="welcome_msg">Hoş geldiniz</string>
     <string name="search">Ara</string>
     <string name="preview">Şarkı Önizlemesi</string>
